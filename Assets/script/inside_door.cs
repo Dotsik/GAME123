@@ -5,11 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class inside_door : MonoBehaviour
 {
-    void Update()
+    void OnMouseDown()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            SceneManager.LoadScene("inside");
-        }  
+        SceneManager.LoadScene("inside");
     }
 }
