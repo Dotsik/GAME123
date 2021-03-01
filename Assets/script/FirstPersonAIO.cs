@@ -13,7 +13,6 @@ using System.Collections.Generic;
 [RequireComponent(typeof(CapsuleCollider)),RequireComponent(typeof(Rigidbody)),AddComponentMenu("First Person AIO")]
 
 public class FirstPersonAIO : MonoBehaviour {
-    Enemy a = new Enemy(10);
     #region Variables
 
     #region Input Settings
@@ -189,29 +188,6 @@ public class FirstPersonAIO : MonoBehaviour {
     #endregion
 
     #endregion
-    public void OnMouseDown()
-    {
-        //сюда запишется инфо о пересечении луча, если оно будет
-        RaycastHit hit;
-            //сам луч, начинается от позиции этого объекта и направлен в сторону цели
-            Ray ray = new Ray(transform.position, GameObject.FindGameObjectWithTag("Enemy").transform.position - transform.position);
-            //пускаем луч
-            Physics.Raycast(ray, out hit);
-            //если луч с чем-то пересёкся, то..
-            if (hit.collider != null)
-            {
-                //если луч не попал в цель
-                if (hit.collider.gameObject != GameObject.FindGameObjectWithTag("Enemy"))
-                {
-                    Debug.Log("Путь к врагу преграждает объект: " + hit.collider.name);
-                }
-                //если луч попал в цель
-                else
-                {
-                    a.OnCollisionEnter();
-                }
-            }
-    }
 
     private void Awake(){
         #region Look Settings - Awake
