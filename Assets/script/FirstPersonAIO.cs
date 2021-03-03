@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
     using UnityEditor;
@@ -321,12 +322,17 @@ public class FirstPersonAIO : MonoBehaviour {
         #endregion
 
         #region Movement Settings - Update
-        
+
         #endregion
 
         #region Headbobbing Settings - Update
 
         #endregion
+
+        if (Input.GetKeyDown("escape"))
+        {
+            SceneManager.LoadScene("main_menu");
+        }
 
     }
 
@@ -764,10 +770,6 @@ public class FirstPersonAIO : MonoBehaviour {
         static bool showAdvanced = false;
         static bool showStaticFS = false;
         
-        /* static bool viewFuncSnipets=false;
-        static bool showCameraShakeSnip=false;
-        static bool showRotateCamSnip = false;
-        static bool showControllerPauesSnip = false; */
 
         SerializedProperty staticFS;
 
@@ -1427,15 +1429,7 @@ public class FirstPersonAIO : MonoBehaviour {
             }
         #endregion
 
-        /*   
-        #region FunctionSnipets
-            GUILayout.Label("Audio/SFX Setup",new GUIStyle(GUI.skin.label){alignment = TextAnchor.MiddleCenter,fontStyle = FontStyle.Bold, fontSize = 13},GUILayout.ExpandWidth(true));
-            EditorGUILayout.Space();
-            EditorGUILayout.Space();
 
-        #endregion 
-        
-        */
 
 
 

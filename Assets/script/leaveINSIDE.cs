@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class inside_door : MonoBehaviour
+public class leaveINSIDE : MonoBehaviour
 {
     void OnMouseDown()
     {
-        SceneManager.LoadScene("inside");
+        SceneManager.LoadScene("main");
     }
-
 }

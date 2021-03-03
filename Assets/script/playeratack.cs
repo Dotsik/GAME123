@@ -13,14 +13,14 @@ public class playeratack : MonoBehaviour
     }
 
     
-    void Update()
+    void Update()// атка по ПКМ
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             DoAtack();
         }
     }
-    private void DoAtack()
+    private void DoAtack() // действие при атаке
     {   
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
