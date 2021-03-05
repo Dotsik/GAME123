@@ -17,5 +17,13 @@ public class leaveOP : MonoBehaviour
     {
         SceneManager.LoadScene("main_menu");
     }
+
+    void Update()
+    {
+        if (Input.GetKeyDown("escape"))
+        {
+            SceneManager.LoadScene("main_menu");
+        }
+    }
     
 }

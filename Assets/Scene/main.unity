@@ -1905,15 +1905,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 732e6bc584ac4da418fac5fb1486c8e9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.21
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 732e6bc584ac4da418fac5fb1486c8e9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.83
+      value: 5.7
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 732e6bc584ac4da418fac5fb1486c8e9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.74
+      value: 10.53
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 732e6bc584ac4da418fac5fb1486c8e9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3232,7 +3232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4448068258976056, guid: 2e62f5703e5f8d2488a5e1bc8433be41, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.38
+      value: 5.44
       objectReference: {fileID: 0}
     - target: {fileID: 4448068258976056, guid: 2e62f5703e5f8d2488a5e1bc8433be41, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7350,7 +7350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   atackdamage: 25
-  atackrange: 50
+  atackrange: 5
 --- !u!65 &1815973802
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8220,7 +8220,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2062023759}
   m_LocalRotation: {x: -0, y: -0.46517155, z: -0, w: 0.8852206}
-  m_LocalPosition: {x: 0.20857862, y: 5.19, z: -20.05777}
+  m_LocalPosition: {x: 0.20857862, y: 4.94, z: -20.05777}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
