@@ -10,7 +10,7 @@ public class enemyhealth : MonoBehaviour
         health -= amnt;
         if (health <= 0)
         {
-            Destroy(GameObject.FindGameObjectWithTag("Enemy"), .5f);
+            Destroy(gameObject);
         }
     }
 }
