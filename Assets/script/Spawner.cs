@@ -13,6 +13,8 @@ public class Spawner : MonoBehaviour
     public float rotation_speed;
     public Transform enemy;
     public Vector3 vector3, vector2;
+  
+
 
     Vector3 RandomBetweenRadius2D(float minRad,float y, float maxRad)
     {
@@ -54,7 +56,7 @@ public class Spawner : MonoBehaviour
 
     void Update()
     {
-
+        
     }
 
 }
