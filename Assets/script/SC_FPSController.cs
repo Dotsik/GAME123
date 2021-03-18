@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
-[RequireComponent(typeof(CharacterController))]
 
-public class SC_FPSController : MonoBehaviour
+class SC_FPSController : MonoBehaviour
 {
     //движение
     public float walkingSpeed = 7.5f;
@@ -37,6 +39,11 @@ public class SC_FPSController : MonoBehaviour
     public float timer;
     public bool ispuse;
     public bool guipuse;
+    // сохранение
+    public Text save;
+    int intToSave;
+    float floatToSave;
+    bool boolToSave;
 
     void Start()
     {
@@ -69,6 +76,7 @@ public class SC_FPSController : MonoBehaviour
         else if (ispuse == false) // если не на паузе
         {
             Cursor.lockState = CursorLockMode.Locked;
+            save.text = "";
             timer = 1f;
             guipuse = false;
             //движение
@@ -139,23 +147,85 @@ public class SC_FPSController : MonoBehaviour
         isDead = true;
         playerMovement.enabled = false;
     }
-    public void OnGUI()
+    void SaveGame()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath
+          + "/MySaveData.dat");
+        SaveData data = new SaveData();
+        data.savedInt = intToSave;
+        data.savedFloat = floatToSave;
+        data.savedBool = boolToSave;
+        bf.Serialize(file, data);
+        file.Close();
+        Debug.Log("Game data saved!");
+    }
+    void LoadGame()
+    {
+        if (File.Exists(Application.persistentDataPath
+          + "/MySaveData.dat"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file =
+              File.Open(Application.persistentDataPath
+              + "/MySaveData.dat", FileMode.Open);
+            SaveData data = (SaveData)bf.Deserialize(file);
+            file.Close();
+            intToSave = data.savedInt;
+            floatToSave = data.savedFloat;
+            boolToSave = data.savedBool;
+            Debug.Log("Game data loaded!");
+        }
+        else
+            Debug.LogError("There is no save data!");
+    }
+    void ResetData()
+    {
+        if (File.Exists(Application.persistentDataPath
+          + "/MySaveData.dat"))
+        {
+            File.Delete(Application.persistentDataPath
+              + "/MySaveData.dat");
+            intToSave = 0;
+            floatToSave = 0.0f;
+            boolToSave = false;
+            Debug.Log("Data reset complete!");
+        }
+        else
+            Debug.LogError("No save data to delete.");
+    }
+    void OnGUI()
     {
         if (guipuse == true)
         {
             Cursor.visible = true;// включаем отображение курсора
+            if (GUI.Button(new Rect((float)(Screen.width / 2 - 50), (float)(Screen.height / 2), 150f, 45f), "Зберегти"))
+            {
+                SaveGame();
+                save.text = "Збережено";
+                timer = 0;
+            }
             if (GUI.Button(new Rect((float)(Screen.width / 2 - 50), (float)(Screen.height / 2) - 50f, 150f, 45f), "Продовжити"))
             {
                 ispuse = false;
                 timer = 0;
                 Cursor.visible = false;
+                save.text = "";
             }
-            if (GUI.Button(new Rect((float)(Screen.width / 2 - 50), (float)(Screen.height / 2), 150f, 45f), "Головне меню"))
+            if (GUI.Button(new Rect((float)(Screen.width / 2 - 50), (float)(Screen.height / 2)+50 ,150f, 45f), "Головне меню"))
             {
                 ispuse = false;
                 timer = 0;
-                Application.LoadLevel("Menu");
+                SaveGame();
+                save.text = "";
             }
         }
     }
+}
+[Serializable]
+class SaveData
+{
+    public int savedInt;
+    public float savedFloat;
+    public bool savedBool;
 }
