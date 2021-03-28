@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 212001426}
   - component: {fileID: 212001425}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Option
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -511,7 +511,7 @@ GameObject:
   - component: {fileID: 964225862}
   - component: {fileID: 964225861}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -708,7 +708,7 @@ GameObject:
   - component: {fileID: 1498307047}
   - component: {fileID: 1498307046}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Continue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -824,6 +824,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1701711991}
   - component: {fileID: 1701711990}
+  - component: {fileID: 1701711992}
   - component: {fileID: 1701711989}
   m_Layer: 0
   m_Name: Main Camera
@@ -897,6 +898,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1701711992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701711988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dba8c64547115946ab9bcbadbad47e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  start: {fileID: 964225861}
+  Option: {fileID: 212001425}
+  Continue: {fileID: 1498307046}
+  Exit: {fileID: 2125497278}
 --- !u!1 &1734907150
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,7 +1163,7 @@ GameObject:
   - component: {fileID: 2125497279}
   - component: {fileID: 2125497278}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
