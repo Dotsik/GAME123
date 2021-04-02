@@ -13,7 +13,7 @@ public class main_menuu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Continue.Active = false;
+       //Continue.Active = false;
     }
 
     // Update is called once per frame
