@@ -19,6 +19,7 @@ public class Trigger_Al_Attack_Hit : MonoBehaviour
     void Update()
     {
 		
+		
     }
 
    // void OnTriggerEnter(Collider col)

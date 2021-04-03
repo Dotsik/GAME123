@@ -119,7 +119,7 @@ class SC_FPSController : MonoBehaviour
                 damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
             }
             damaged = false;
-            //if (Input.GetMouseButtonDown(1))
+           
                 
         }
     }

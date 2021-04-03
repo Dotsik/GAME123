@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Trigger
+  - Trigger_Alien_Attack_Hit
   layers:
   - Default
   - TransparentFX
