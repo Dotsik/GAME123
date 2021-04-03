@@ -5,8 +5,9 @@ using UnityEngine.UI;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using UnityEngine.SceneManagement;
 
-
+[Serializable]
 class SC_FPSController : MonoBehaviour
 {
     //движение
@@ -25,6 +26,10 @@ class SC_FPSController : MonoBehaviour
     public bool canMove = true;
     //смерть
     bool isDead;
+    //приветствие
+    public Image helloo;
+    public Text Helloo;
+    int str = 1;
     //получение урона
     bool damaged;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
@@ -37,19 +42,22 @@ class SC_FPSController : MonoBehaviour
     public Slider healthSlider;
     // пауза
     public float timer;
-    public bool ispuse;
-    public bool guipuse;
-    // сохранение
-    public Text save;
-    int intToSave;
-    float floatToSave;
-    bool boolToSave;
+    public bool ispuse = false;
+    public bool guipuse = false;
+    //настройки
+    public Text setting_text;
+    bool inp = false;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.visible = true;
+        helloo.enabled = true;
+        Helloo.enabled = true;
+        guipuse = true;
+        ispuse = true;
+        setting_text.enabled = false;
     }
 
     void Update()
@@ -58,25 +66,23 @@ class SC_FPSController : MonoBehaviour
         Time.timeScale = timer;
         if (Input.GetKeyDown(KeyCode.Escape) && ispuse == false) // поставить на паузу
         {
-            Cursor.lockState = CursorLockMode.None;
+            guipuse = true;
             ispuse = true;
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && ispuse == true) // убрать паузу
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            guipuse = false;
             ispuse = false;
         }
         if (ispuse == true) //если на паузе
         {
             Cursor.lockState = CursorLockMode.None;
             timer = 0;
-            guipuse = true;
-
         }
-        else if (ispuse == false) // если не на паузе
+        if (ispuse == false) // если не на паузе
         {
             Cursor.lockState = CursorLockMode.Locked;
-            save.text = "";
+            Cursor.visible = false;
             timer = 1f;
             guipuse = false;
             //движение
@@ -119,8 +125,6 @@ class SC_FPSController : MonoBehaviour
                 damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
             }
             damaged = false;
-           
-                
         }
     }
     void Awake()
@@ -141,91 +145,59 @@ class SC_FPSController : MonoBehaviour
             Death();
         }
     }
-
     void Death() //после смерти
     {
         isDead = true;
         playerMovement.enabled = false;
     }
-    void SaveGame()
-    {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath
-          + "/MySaveData.dat");
-        SaveData data = new SaveData();
-        data.savedInt = intToSave;
-        data.savedFloat = floatToSave;
-        data.savedBool = boolToSave;
-        bf.Serialize(file, data);
-        file.Close();
-        Debug.Log("Game data saved!");
-    }
-    void LoadGame()
-    {
-        if (File.Exists(Application.persistentDataPath
-          + "/MySaveData.dat"))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file =
-              File.Open(Application.persistentDataPath
-              + "/MySaveData.dat", FileMode.Open);
-            SaveData data = (SaveData)bf.Deserialize(file);
-            file.Close();
-            intToSave = data.savedInt;
-            floatToSave = data.savedFloat;
-            boolToSave = data.savedBool;
-            Debug.Log("Game data loaded!");
-        }
-        else
-            Debug.LogError("There is no save data!");
-    }
-    void ResetData()
-    {
-        if (File.Exists(Application.persistentDataPath
-          + "/MySaveData.dat"))
-        {
-            File.Delete(Application.persistentDataPath
-              + "/MySaveData.dat");
-            intToSave = 0;
-            floatToSave = 0.0f;
-            boolToSave = false;
-            Debug.Log("Data reset complete!");
-        }
-        else
-            Debug.LogError("No save data to delete.");
-    }
     void OnGUI()
     {
-        if (guipuse == true)
+        if(str == 1)
+        {
+            if (GUI.Button(new Rect((float)(Screen.width / 2 + 50), (float)(Screen.height / 2+70), 150f, 45f), "Закрити"))
+            {
+                ispuse = false;
+                timer = 0;
+                Cursor.visible = false;
+                helloo.enabled = false;
+                Helloo.enabled = false;
+                str = 0;
+            }
+        }
+        else if (guipuse == true)
         {
             Cursor.visible = true;// включаем отображение курсора
-            if (GUI.Button(new Rect((float)(Screen.width / 2 - 50), (float)(Screen.height / 2), 150f, 45f), "Зберегти"))
+            if (GUI.Button(new Rect((float)(Screen.width / 2 - 50), (float)(Screen.height / 2), 150f, 45f), "Підказки ВІМК/ВИМК"))
             {
-                SaveGame();
-                save.text = "Збережено";
                 timer = 0;
+                if (inp == false)
+                {
+                    inp = true;
+                    setting_text.enabled = true;
+                }
+                else
+                {
+                    inp = false;
+                    setting_text.enabled = false;
+                }
             }
             if (GUI.Button(new Rect((float)(Screen.width / 2 - 50), (float)(Screen.height / 2) - 50f, 150f, 45f), "Продовжити"))
             {
                 ispuse = false;
                 timer = 0;
                 Cursor.visible = false;
-                save.text = "";
             }
-            if (GUI.Button(new Rect((float)(Screen.width / 2 - 50), (float)(Screen.height / 2)+50 ,150f, 45f), "Головне меню"))
+            if (GUI.Button(new Rect((float)(Screen.width / 2 - 50), (float)(Screen.height / 2) + 50, 150f, 45f), "Головне меню"))
             {
                 ispuse = false;
                 timer = 0;
-                SaveGame();
-                save.text = "";
             }
         }
+        else
+        {
+            ispuse = false;
+            timer = 1f;
+            Cursor.visible = false;
+        }
     }
-}
-[Serializable]
-class SaveData
-{
-    public int savedInt;
-    public float savedFloat;
-    public bool savedBool;
 }
