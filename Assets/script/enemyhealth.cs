@@ -1,16 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Timers;
 
 public class enemyhealth : MonoBehaviour
 {
-    public float health = 25;
-    public void TakeDamage(float amnt)
+    public GameObject Obj;
+    private string trigger_Die_1 = "Die_1";
+    private float health = 100;
+
+    private IEnumerator KillOnAnimationEnd()
     {
-        health -= amnt;
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
+    }
+
+
+    public void TakeDamage(float dmg)
+    {
+        health -= dmg;
+        
+
         if (health <= 0)
         {
-            Destroy(gameObject);
+            GetComponent<Animator>().SetTrigger(trigger_Die_1);
+            StartCoroutine(KillOnAnimationEnd());
         }
     }
+    void Update()
+    {
+       
+    }
+
 }
