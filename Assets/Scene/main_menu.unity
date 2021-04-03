@@ -280,7 +280,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 212001426}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1701711992}
+        m_MethodName: settings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &212001426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.48235294, g: 0.48235294, b: 0.48235294, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -579,7 +590,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 964225862}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1701711992}
+        m_MethodName: load_new_game
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &964225862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,7 +615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -776,7 +798,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1498307047}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1701711992}
+        m_MethodName: load_game
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1498307047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,7 +823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.48235294, g: 0.48235294, b: 0.48235294, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -824,8 +857,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1701711991}
   - component: {fileID: 1701711990}
-  - component: {fileID: 1701711992}
   - component: {fileID: 1701711989}
+  - component: {fileID: 1701711992}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -910,10 +943,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dba8c64547115946ab9bcbadbad47e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: {fileID: 964225861}
-  Option: {fileID: 212001425}
-  Continue: {fileID: 1498307046}
-  Exit: {fileID: 2125497278}
 --- !u!1 &1734907150
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,7 +1260,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2125497279}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1701711992}
+        m_MethodName: exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2125497279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1245,7 +1285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.48235294, g: 0.48235294, b: 0.48235294, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
