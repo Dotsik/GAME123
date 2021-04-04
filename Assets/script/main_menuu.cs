@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class main_menuu : MonoBehaviour
 {
@@ -9,16 +10,25 @@ public class main_menuu : MonoBehaviour
     public Button Option;
     public Button Continue;
     public Button Exit;
+    public Button Back;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-       //Continue.Active = false;
+    public void starting(){
+        SceneManager.LoadScene("main");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void contining(){
+
+    }
+
+    public void setting(){
+        SceneManager.LoadScene("parametrs");
+    }
+
+    public void exit(){
+        Application.Quit();
+    }
+
+    public void Backk(){
+        SceneManager.LoadScene("main_menu");
     }
 }
