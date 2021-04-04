@@ -5,12 +5,14 @@ using UnityEngine;
 public class playeratack : MonoBehaviour
 {
     public Camera cam;
-    public int distanse;
+    public GameObject Hand;
+    public weapon myweapon;
     void Start()
     {
-        
+        myweapon = Hand.GetComponentInChildren<weapon>();
     }
-       
+
+    
     void Update()// атка по ПКМ
     {
         if (Input.GetMouseButtonDown(1))
@@ -18,18 +20,17 @@ public class playeratack : MonoBehaviour
             DoAtack();
         }
     }
-
     private void DoAtack() // действие при атаке
     {   
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if(Physics.Raycast(ray,out hit, distanse))
+        if(Physics.Raycast(ray,out hit, myweapon.atackrange))
         {
             if(hit.collider.tag == "Enemy")
             {
-                Enemy eHealth = hit.collider.GetComponent<Enemy>();
-                eHealth.TakeDamage(25);
+                enemyhealth eHealth = hit.collider.GetComponent<enemyhealth>();
+                eHealth.TakeDamage(myweapon.atackdamage);
             }
         }
     }

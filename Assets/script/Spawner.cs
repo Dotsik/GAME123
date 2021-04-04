@@ -39,7 +39,7 @@ public class Spawner : MonoBehaviour
         enemy.position += enemy.forward * move_speed * Time.deltaTime;
         var children = Instantiate(Cube, vector3, Quaternion.identity) as GameObject;
         children.GetComponent<Enemy>().enabled=true;
-        //Repeat();
+        Repeat();
         
     }
 
@@ -49,10 +49,10 @@ public class Spawner : MonoBehaviour
         StartCoroutine(SpawnCD());
     }
 
-    //void Repeat()
-   // {
-   //     StartCoroutine(SpawnCD());
-   // }
+    void Repeat()
+    {
+        StartCoroutine(SpawnCD());
+    }
 
     void Update()
     {
