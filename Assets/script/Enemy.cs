@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
+
 
 public class Enemy : MonoBehaviour
 {
@@ -8,9 +12,17 @@ public class Enemy : MonoBehaviour
     public float move_speed;//МС врага
     public float rotation_speed;//РС врага
     public Transform enemy;//Transform врага
+    public GameObject GOEnemy;// GameObject врага;
+    public float timer;//Таймер
+    public float timer_to_new_Vawe;//Таймер к новой волне
     private string trigger_Die_1 = "Die_1";//Триггер смерти врага
     private string trigger_Attack_zone = "Attack_zone";//Триггер атаки врага
-    private float health = 100; //ХП врага
+    private int health = 100; //ХП врага
+    private Vector3 vector3, vector2;//Вектора хз как работает
+    private static int[] Vawes = new int[] { 15, 20, 25, 40};//Волны
+    private int counter, cer = 0;
+    
+    public Text i;
     
     private IEnumerator Attackdelay()//Функция задержки удара
     {
@@ -18,12 +30,14 @@ public class Enemy : MonoBehaviour
         this.move_speed = 7;
         this.rotation_speed = 7; 
     }
+    
     private IEnumerator KillOnAnimationEnd()//Функция уничтожения
     {
         yield return new WaitForSeconds(2.5f);
         Destroy(gameObject);
     }
-    public void TakeDamage(float dmg)//Анимация смерти 
+    
+    public void TakeDamage(int dmg)//Анимация смерти 
     {
         health -= dmg;
         
@@ -35,6 +49,7 @@ public class Enemy : MonoBehaviour
             StartCoroutine(KillOnAnimationEnd());
         }
     }
+    
     void Update()//Функция передвижения врага
     {
         var look_dir = player.position - enemy.position;
@@ -42,6 +57,7 @@ public class Enemy : MonoBehaviour
         enemy.rotation = Quaternion.Slerp(enemy.rotation, Quaternion.LookRotation(look_dir), rotation_speed * Time.deltaTime);
         enemy.position += enemy.forward * move_speed * Time.deltaTime;
     }
+    
     void OnTriggerStay(Collider col)//Анимация удара 
     {
         if (col.tag == "Trigger_Alien_Attack_Hit")
@@ -51,6 +67,7 @@ public class Enemy : MonoBehaviour
             this.rotation_speed = 3;
         }
     }
+   
     void OnTriggerExit(Collider col)//Анимация задержки удара
     {
         if (col.tag == "Trigger_Alien_Attack_Hit")
@@ -58,4 +75,52 @@ public class Enemy : MonoBehaviour
             StartCoroutine(Attackdelay());
         }
     }
+    
+   Vector3 RandomBetweenRadius2D(float minRad,float y, float maxRad)//хз как работает
+    {
+        float radius = UnityEngine.Random.Range(minRad, maxRad);
+        float angle = UnityEngine.Random.Range(0, 360);
+
+        float x = Mathf.Sin(Mathf.Deg2Rad * angle) * radius;
+        float z = Mathf.Cos(Mathf.Deg2Rad * angle) * radius;
+
+        return new Vector3(x, y, z);
+    }
+
+   IEnumerator SpawnCD()//Спавнер
+   {
+       
+       
+       if (Vawes[cer] < 1)
+       {
+          ++cer;
+          Start();
+          yield return new WaitForSeconds(timer_to_new_Vawe);
+       }
+       else
+       {
+          
+           Vawes[cer]--;
+           vector3 = RandomBetweenRadius2D(60, player.position.y, 100);
+           yield return new WaitForSeconds(timer);
+           var look_dir = player.position - enemy.position;
+           look_dir.y = 0;
+           enemy.rotation = Quaternion.Slerp(enemy.rotation, Quaternion.LookRotation(look_dir),
+               rotation_speed * Time.deltaTime);
+           enemy.position += enemy.forward * move_speed * Time.deltaTime;
+           var children = Instantiate(GOEnemy, vector3, Quaternion.identity) as GameObject;
+           children.GetComponent<Enemy>().enabled = true;
+           
+       }
+
+   }
+   
+   
+   
+    void Start()
+    {
+           StartCoroutine(SpawnCD()); 
+    }
+    
+    
 }
