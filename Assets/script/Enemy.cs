@@ -14,12 +14,12 @@ public class Enemy : MonoBehaviour
     public Transform enemy;//Transform врага
     public GameObject GOEnemy;// GameObject врага;
     public float timer;//Таймер
-    public float timer_to_new_Vawe;//Таймер к новой волне
+    private float timer_to_new_Vawe = 10f;//Таймер к новой волне
     private string trigger_Die_1 = "Die_1";//Триггер смерти врага
     private string trigger_Attack_zone = "Attack_zone";//Триггер атаки врага
     private int health = 100; //ХП врага
     private Vector3 vector3, vector2;//Вектора хз как работает
-    private static int[] Vawes = new int[] { 15, 20, 25, 40};//Волны
+    private static int[] Vawes = new int[] { 10, 10, 10, 10};//Волны
     private int counter, cer = 0;
     
     public Text i;
@@ -96,11 +96,13 @@ public class Enemy : MonoBehaviour
           ++cer;
           Start();
           yield return new WaitForSeconds(timer_to_new_Vawe);
+          Debug.Log(cer);
        }
        else
        {
           
            Vawes[cer]--;
+            Debug.Log(Vawes[cer]);
            vector3 = RandomBetweenRadius2D(60, player.position.y, 100);
            yield return new WaitForSeconds(timer);
            var look_dir = player.position - enemy.position;
