@@ -1,19 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playeratack : MonoBehaviour
 {
     public Camera cam;
     public int distanse;
+    public Text damage_text;
     void Start()
     {
         
     }
        
-    void Update()// атка по ПКМ
+    void Update()// атка по ЛКМ
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0))
         {
             DoAtack();
         }
@@ -28,6 +30,7 @@ public class playeratack : MonoBehaviour
         {
             if(hit.collider.tag == "Enemy")
             {
+                damage_text.text = 25.ToString();
                 Enemy eHealth = hit.collider.GetComponent<Enemy>();
                 eHealth.TakeDamage(25);
             }

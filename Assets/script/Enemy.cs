@@ -103,7 +103,7 @@ public class Enemy : MonoBehaviour
           
            Vawes[cer]--;
             Debug.Log(Vawes[cer]);
-           vector3 = RandomBetweenRadius2D(60, player.position.y, 100);
+           vector3 = RandomBetweenRadius2D(100, player.position.y, 150);
            yield return new WaitForSeconds(timer);
            var look_dir = player.position - enemy.position;
            look_dir.y = 0;

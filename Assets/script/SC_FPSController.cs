@@ -25,11 +25,7 @@ class SC_FPSController : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
     //смерть
-    bool isDead;
-    //приветствие
-    public Image helloo;
-    public Text Helloo;
-    int str = 1;
+    bool isDead = false;
     //получение урона
     bool damaged;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
@@ -38,7 +34,6 @@ class SC_FPSController : MonoBehaviour
     //хп
     public int startingHealth = 100;
     public int currentHealth;
-    public Text hp;
     public Slider healthSlider;
     // пауза
     public float timer;
@@ -46,31 +41,45 @@ class SC_FPSController : MonoBehaviour
     public bool guipuse = false;
     //настройки
     public Text setting_text;
-    bool inp = false;
+    public Text ff1;
+    //курсор
+    public Image cursore;
+    public Text damage_text;
+    //босс
+    public Slider boss_hp;
+    public Text boss_name;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        Cursor.visible = true;
-        helloo.enabled = true;
-        Helloo.enabled = true;
+        Cursor.visible = false;
         guipuse = true;
-        ispuse = true;
         setting_text.enabled = false;
+        ff1.enabled = false;
+        setting_text.enabled = true;
+        cursore.enabled = true;
+        damage_text.enabled = true;
+        boss_name.enabled = false;
+        boss_hp.enabled = false;
     }
 
     void Update()
     {
         //пауза
         Time.timeScale = timer;
-        if(str == 0){
         if (Input.GetKeyDown(KeyCode.Escape) && ispuse == false) // поставить на паузу
         {
+            ff1.enabled = true;
+            cursore.enabled = false;
+            damage_text.enabled = false;
             guipuse = true;
             ispuse = true;
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && ispuse == true) // убрать паузу
         {
+            cursore.enabled = true;
+            damage_text.enabled = true;
+            ff1.enabled = false;
             guipuse = false;
             ispuse = false;
         }
@@ -81,7 +90,15 @@ class SC_FPSController : MonoBehaviour
         }
         if (ispuse == false) // если не на паузе
         {
-            Cursor.lockState = CursorLockMode.Locked;
+                if (Input.GetKeyDown(KeyCode.F1))
+                {
+                    if (setting_text.enabled == true)
+                    {
+                        setting_text.enabled = false;
+                    }
+                    else { setting_text.enabled = true; }
+                }
+                Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             timer = 1f;
             guipuse = false;
@@ -126,7 +143,6 @@ class SC_FPSController : MonoBehaviour
             }
             damaged = false;
         }
-        }
     }
     void Awake()
     {
@@ -140,7 +156,6 @@ class SC_FPSController : MonoBehaviour
         damaged = true;
         currentHealth -= amount;
         healthSlider.value = currentHealth;
-        hp.text = currentHealth.ToString();
         if (currentHealth <= 0 && !isDead) //если умер
         {
             Death();
@@ -153,51 +168,49 @@ class SC_FPSController : MonoBehaviour
     }
     void OnGUI()
     {
-        if(str == 1)
+        if (isDead == true)
         {
-            if (GUI.Button(new Rect((float)(Screen.width / 2 + 50), (float)(Screen.height / 2+85), 150f, 45f), "Закрити"))
+            ff1.enabled = true;
+            cursore.enabled = false;
+            damage_text.enabled = false;
+            guipuse = true;
+            ispuse = true;
+            Cursor.visible = true;
+            if (GUI.Button(new Rect((float)(Screen.width / 2 - 50), (float)(Screen.height / 2) - 25, 150f, 45f), "Почати нову гру"))
             {
-                ispuse = false;
-                timer = 0;
-                Cursor.visible = false;
-                helloo.enabled = false;
-                Helloo.enabled = false;
-                str = 0;
+                SceneManager.LoadScene("main");
             }
-        }
-        else if (guipuse == true)
-        {
-            Cursor.visible = true;// включаем отображение курсора
-            if (GUI.Button(new Rect((float)(Screen.width / 2 - 50), (float)(Screen.height / 2), 150f, 45f), "Підказки ВІМК/ВИМК"))
-            {
-                timer = 0;
-                if (inp == false)
-                {
-                    inp = true;
-                    setting_text.enabled = true;
-                }
-                else
-                {
-                    inp = false;
-                    setting_text.enabled = false;
-                }
-            }
-            if (GUI.Button(new Rect((float)(Screen.width / 2 - 50), (float)(Screen.height / 2) - 50f, 150f, 45f), "Продовжити"))
-            {
-                ispuse = false;
-                timer = 0;
-                Cursor.visible = false;
-            }
-            if (GUI.Button(new Rect((float)(Screen.width / 2 - 50), (float)(Screen.height / 2) + 50, 150f, 45f), "Головне меню"))
+            if (GUI.Button(new Rect((float)(Screen.width / 2 - 50), (float)(Screen.height / 2) + 25, 150f, 45f), "Головне меню"))
             {
                 SceneManager.LoadScene("main_menu");
             }
         }
         else
         {
-            ispuse = false;
-            timer = 1f;
-            Cursor.visible = false;
+            if (guipuse == true)
+            {
+                Cursor.visible = true;// включаем отображение курсора
+                if (GUI.Button(new Rect((float)(Screen.width / 2 - 50), (float)(Screen.height / 2) - 25, 150f, 45f), "Продовжити"))
+                {
+                    damage_text.enabled = true;
+                    cursore.enabled = true;
+                    ff1.enabled = false;
+                    ispuse = false;
+                    timer = 0;
+                    Cursor.visible = false;
+                }
+                if (GUI.Button(new Rect((float)(Screen.width / 2 - 50), (float)(Screen.height / 2) + 25, 150f, 45f), "Головне меню"))
+                {
+                    SceneManager.LoadScene("main_menu");
+                }
+            }
+            else
+            {
+                ff1.enabled = false;
+                ispuse = false;
+                timer = 1f;
+                Cursor.visible = false;
+            }
         }
     }
 }

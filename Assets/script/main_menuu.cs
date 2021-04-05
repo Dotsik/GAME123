@@ -12,6 +12,14 @@ public class main_menuu : MonoBehaviour
     public Button Exit;
     public Button Back;
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("main_menu");
+        }
+    }
+
     public void starting(){
         SceneManager.LoadScene("main");
     }
