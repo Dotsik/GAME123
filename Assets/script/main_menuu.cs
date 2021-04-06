@@ -11,9 +11,12 @@ public class main_menuu : MonoBehaviour
     public Button Continue;
     public Button Exit;
     public Button Back;
+    public Button GG;
 
     void Update()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("main_menu");
@@ -37,6 +40,10 @@ public class main_menuu : MonoBehaviour
     }
 
     public void Backk(){
+        SceneManager.LoadScene("main_menu");
+    }
+
+    public void GG_WP(){
         SceneManager.LoadScene("main_menu");
     }
 }

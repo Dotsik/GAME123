@@ -48,6 +48,8 @@ class SC_FPSController : MonoBehaviour
     //босс
     public Slider boss_hp;
     public Text boss_name;
+    public Text volna;
+    public Text volna2;
 
     void Start()
     {
@@ -61,13 +63,22 @@ class SC_FPSController : MonoBehaviour
         damage_text.enabled = true;
         boss_name.enabled = false;
         boss_hp.gameObject.SetActive(false);
-        
+        volna.enabled = true;
+        volna2.enabled = false;
     }
 
     void Update()
     {
         //пауза
         Time.timeScale = timer;
+        if (Input.GetKeyDown(KeyCode.F1))
+                {
+                    if (setting_text.enabled == true)
+                    {
+                        setting_text.enabled = false;
+                    }
+                    else { setting_text.enabled = true; }
+                }
         if (Input.GetKeyDown(KeyCode.Escape) && ispuse == false) // поставить на паузу
         {
             ff1.enabled = true;
@@ -91,14 +102,6 @@ class SC_FPSController : MonoBehaviour
         }
         if (ispuse == false) // если не на паузе
         {
-                if (Input.GetKeyDown(KeyCode.F1))
-                {
-                    if (setting_text.enabled == true)
-                    {
-                        setting_text.enabled = false;
-                    }
-                    else { setting_text.enabled = true; }
-                }
                 Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             timer = 1f;

@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -19,10 +19,13 @@ public class Enemy : MonoBehaviour
     private int health = 100; //ХП врага
     private static int points = 0;//Очки
     private Vector3 vector3, vector2;//Вектора хз как работает
-    private static int Vawe = 10;//Волны
+    private static int Vawe = 1;//Волны
     private int counter;
     private static int temp = 0,temp1=1,temp2=0;
    public Text Vawe_info,Points_info;
+   public bool winn = false;
+   public Text volna;
+    public Text volna2;
     
     
     private IEnumerator Attackdelay()//Функция задержки удара
@@ -62,17 +65,22 @@ public class Enemy : MonoBehaviour
         Vawe_info.text="To next - " + (GameObject.FindGameObjectsWithTag("Enemy").Length-1).ToString();
         if ((GameObject.FindGameObjectsWithTag("Enemy").Length-1)==0)
         {
+            if(winn == true){
+                    SceneManager.LoadScene("win");
+                }
             if (temp == 1)
             {
-                Vawe = 20;
+                volna.enabled = false;
+                volna2.enabled = true;
+                Vawe = 1;
                 Start();
                 temp = 0;
                 temp2 = 1;
-
+                
             }
             else if (temp1 == 0 && temp2==1 )
             {
-              ///СЮДА кончать  
+                winn = true;
             }
         }
         
