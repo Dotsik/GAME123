@@ -60,7 +60,8 @@ class SC_FPSController : MonoBehaviour
         cursore.enabled = true;
         damage_text.enabled = true;
         boss_name.enabled = false;
-        boss_hp.enabled = false;
+        boss_hp.gameObject.SetActive(false);
+        
     }
 
     void Update()

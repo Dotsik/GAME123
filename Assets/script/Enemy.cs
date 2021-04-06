@@ -14,15 +14,16 @@ public class Enemy : MonoBehaviour
     public Transform enemy;//Transform врага
     public GameObject GOEnemy;// GameObject врага;
     public float timer;//Таймер
-    private float timer_to_new_Vawe = 10f;//Таймер к новой волне
+    private float timer_to_new_Vawe = 5f;//Таймер к новой волне
     private string trigger_Die_1 = "Die_1";//Триггер смерти врага
     private string trigger_Attack_zone = "Attack_zone";//Триггер атаки врага
     private int health = 100; //ХП врага
+    private static int points = 0;//Очки
     private Vector3 vector3, vector2;//Вектора хз как работает
-    private static int[] Vawes = new int[] { 10, 10, 10, 10};//Волны
+    private static int[] Vawes = new int[] {10,10,10,10};//Волны
     private int counter, cer = 0;
+   public Text Vawe_info,Points_info;
     
-    public Text i;
     
     private IEnumerator Attackdelay()//Функция задержки удара
     {
@@ -35,6 +36,7 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(2.5f);
         Destroy(gameObject);
+        points += 25;
     }
     
     public void TakeDamage(int dmg)//Анимация смерти 
@@ -56,6 +58,9 @@ public class Enemy : MonoBehaviour
         look_dir.y = 0;
         enemy.rotation = Quaternion.Slerp(enemy.rotation, Quaternion.LookRotation(look_dir), rotation_speed * Time.deltaTime);
         enemy.position += enemy.forward * move_speed * Time.deltaTime;
+        Points_info.text = "Points - " + points.ToString();
+        Vawe_info.text="To next - " + GameObject.FindGameObjectsWithTag("Enemy").Length.ToString();
+        
     }
     
     void OnTriggerStay(Collider col)//Анимация удара 
@@ -89,21 +94,26 @@ public class Enemy : MonoBehaviour
 
    IEnumerator SpawnCD()//Спавнер
    {
-       
-       
        if (Vawes[cer] < 1)
        {
-          ++cer;
+           
+           cer++;
           Start();
-          yield return new WaitForSeconds(timer_to_new_Vawe);
+          Debug.Log("LOL");
           Debug.Log(cer);
+          
+       }
+       else if (cer == 3)
+       {
+           Debug.Log("Poluchilos");
        }
        else
        {
-          
+           
            Vawes[cer]--;
-            Debug.Log(Vawes[cer]);
-           vector3 = RandomBetweenRadius2D(100, player.position.y, 150);
+           Debug.Log("Numbers");
+           Debug.Log(Vawes[cer]);
+           vector3 = RandomBetweenRadius2D(80, player.position.y, 100);
            yield return new WaitForSeconds(timer);
            var look_dir = player.position - enemy.position;
            look_dir.y = 0;
@@ -112,12 +122,9 @@ public class Enemy : MonoBehaviour
            enemy.position += enemy.forward * move_speed * Time.deltaTime;
            var children = Instantiate(GOEnemy, vector3, Quaternion.identity) as GameObject;
            children.GetComponent<Enemy>().enabled = true;
-           
        }
 
    }
-   
-   
    
     void Start()
     {
