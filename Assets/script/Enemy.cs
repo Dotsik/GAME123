@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     private int health = 100; //ХП врага
     private static int points = 0;//Очки
     private Vector3 vector3, vector2;//Вектора хз как работает
-    private static int Vawe = 1;//Волны
+    private static int Vawe = 10;//Волны
     private int counter;
     private static int temp = 0,temp1=1,temp2=0;
    public Text Vawe_info,Points_info;
@@ -72,7 +72,7 @@ public class Enemy : MonoBehaviour
             {
                 volna.enabled = false;
                 volna2.enabled = true;
-                Vawe = 1;
+                Vawe = 20;
                 Start();
                 temp = 0;
                 temp2 = 1;

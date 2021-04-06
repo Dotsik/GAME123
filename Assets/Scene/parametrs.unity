@@ -219,9 +219,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 0}
   Option: {fileID: 0}
-  Continue: {fileID: 0}
   Exit: {fileID: 0}
   Back: {fileID: 90206215}
+  GG: {fileID: 0}
 --- !u!1 &90206213
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,7 +726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.6486039, b: 1, a: 1}
+  m_Color: {r: 0.2783019, g: 1, b: 0.7512304, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:

@@ -8,7 +8,6 @@ public class main_menuu : MonoBehaviour
 {
     public Button start;
     public Button Option;
-    public Button Continue;
     public Button Exit;
     public Button Back;
     public Button GG;
@@ -25,10 +24,6 @@ public class main_menuu : MonoBehaviour
 
     public void starting(){
         SceneManager.LoadScene("main");
-    }
-
-    public void contining(){
-
     }
 
     public void setting(){
