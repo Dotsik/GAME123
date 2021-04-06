@@ -8,7 +8,7 @@ using System.IO;
 using UnityEngine.SceneManagement;
 
 [Serializable]
-class SC_FPSController : MonoBehaviour
+public class SC_FPSController : MonoBehaviour
 {
     //движение
     public float walkingSpeed = 7.5f;
@@ -32,8 +32,8 @@ class SC_FPSController : MonoBehaviour
     public Image damageImage;
     public float flashSpeed = 5f;
     //хп
-    public int startingHealth = 100;
-    public int currentHealth;
+    public float startingHealth = 100;
+    public float currentHealth=100;
     public Slider healthSlider;
     // пауза
     public float timer;
@@ -50,6 +50,7 @@ class SC_FPSController : MonoBehaviour
     public Text boss_name;
     public Text volna;
     public Text volna2;
+	public Text xz;
 
     void Start()
     {
@@ -69,7 +70,8 @@ class SC_FPSController : MonoBehaviour
 
     void Update()
     {
-        //пауза
+		//Debug.Log(healthSlider.value);
+		//пауза
         Time.timeScale = timer;
         if (Input.GetKeyDown(KeyCode.F1))
                 {
@@ -147,24 +149,29 @@ class SC_FPSController : MonoBehaviour
             }
             damaged = false;
         }
+
     }
-    void Awake()
+  public void Awake()
     {
         //начальное хп
         playerMovement = GetComponent<SC_FPSController>();
         currentHealth = startingHealth;
     } 
-    public void TakeDamage(int amount)
+    public float TakeDamage(float amount)
     {
-        //изменение хп
-        damaged = true;
-        currentHealth -= amount;
-        healthSlider.value = currentHealth;
-        if (currentHealth <= 0 && !isDead) //если умер
+		damaged = true;
+		currentHealth-=amount;	
+		Debug.Log(healthSlider.value=0.5f);
+ 		healthSlider.value -= amount;
+        
+				
+        if (healthSlider.value <= 0 && !isDead) //если умер
         {
             Death();
         }
+		return healthSlider.value;
     }
+
     void Death() //после смерти
     {
         isDead = true;

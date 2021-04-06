@@ -25,7 +25,10 @@ public class Enemy : MonoBehaviour
    public Text Vawe_info,Points_info;
    public bool winn = false;
    public Text volna;
-    public Text volna2;
+   public Text volna2;
+   public float dd = 5;
+   public Slider healthSlider;
+   public float currentHealth = 100;
     
     
     private IEnumerator Attackdelay()//Функция задержки удара
@@ -33,6 +36,11 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(0.9f);
         this.move_speed = 7;
         this.rotation_speed = 7; 
+    }
+    private IEnumerator Delay()//Функция задержки удара
+    {
+        yield return new WaitForSeconds(0.9f);
+        
     }
     
     private IEnumerator KillOnAnimationEnd()//Функция уничтожения
@@ -85,7 +93,27 @@ public class Enemy : MonoBehaviour
         }
         
     }
-    
+    public void TakeDamage(float amount)
+    {
+        Delay();
+        currentHealth-=amount;	
+        Debug.Log(healthSlider.value);
+        healthSlider.value -= amount;
+        
+				
+        //if (healthSlider.value <= 0 && !isDead) //если умер
+       // {
+       //     Death();
+       // }
+       // return healthSlider.value;
+    }
+    void OnTriggerEnter(Collider col)//Анимация удара 
+    {
+        if (col.tag == "Trigger_Alien_Attack_Hit")
+        {
+            TakeDamage(dd);
+        }
+    }
     void OnTriggerStay(Collider col)//Анимация удара 
     {
         if (col.tag == "Trigger_Alien_Attack_Hit")
@@ -93,6 +121,8 @@ public class Enemy : MonoBehaviour
             GetComponent<Animator>().SetTrigger(trigger_Attack_zone);
             this.move_speed = 2;
             this.rotation_speed = 3;
+            //new SC_FPSController().TakeDamage(dd);
+            
         }
     }
    

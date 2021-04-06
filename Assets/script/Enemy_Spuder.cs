@@ -74,7 +74,8 @@ public class Enemy_Spuder : MonoBehaviour
                 rotation_speed * Time.deltaTime);
             enemy.position += enemy.forward * move_speed * Time.deltaTime;
             var children = Instantiate(GOEnemy, vector3, Quaternion.identity) as GameObject;
-            children.GetComponent<Enemy>().enabled = true;
+            //children.GetComponent<Enemy>().enabled = true;
+temp--;
         }
         else
             Debug.Log("lox");
