@@ -25,7 +25,7 @@ class SC_FPSController : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
     //смерть
-    bool isDead = false;
+    public bool isDead =false;
     //получение урона
     bool damaged;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
