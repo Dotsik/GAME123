@@ -25,7 +25,7 @@ public class SC_FPSController : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
     //смерть
-    public bool isDead =false;
+    public bool isDead;
     //получение урона
     bool damaged;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
@@ -104,7 +104,7 @@ public class SC_FPSController : MonoBehaviour
         }
         if (ispuse == false) // если не на паузе
         {
-                Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             timer = 1f;
             guipuse = false;
@@ -148,8 +148,11 @@ public class SC_FPSController : MonoBehaviour
                 damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
             }
             damaged = false;
+         if (healthSlider.value <= 0) //если умер
+        {
+            isDead = true;
         }
-
+        }
     }
   public void Awake()
     {
@@ -163,19 +166,7 @@ public class SC_FPSController : MonoBehaviour
 		currentHealth-=amount;	
 		Debug.Log(healthSlider.value=0.5f);
  		healthSlider.value -= amount;
-        
-				
-        if (healthSlider.value <= 0 && !isDead) //если умер
-        {
-            Death();
-        }
 		return healthSlider.value;
-    }
-
-    void Death() //после смерти
-    {
-        isDead = true;
-        playerMovement.enabled = false;
     }
     void OnGUI()
     {
