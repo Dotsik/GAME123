@@ -30,9 +30,11 @@ public class playeratack : MonoBehaviour
         {
             if(hit.collider.tag == "Enemy")
             {
+				GetComponent<Animator>().SetTrigger("Attttttaack");
                 damage_text.text = 25.ToString();
                 Enemy eHealth = hit.collider.GetComponent<Enemy>();
                 eHealth.TakeDamage(25);
+                
             }
         }
     }

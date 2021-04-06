@@ -150,7 +150,7 @@ public class Enemy : MonoBehaviour
 
        if (Vawe > 0)
        {
-           vector3 = RandomBetweenRadius2D(80, player.position.y, 100);
+           vector3 = RandomBetweenRadius2D(100, player.position.y, 120);
            yield return new WaitForSeconds(timer);
            var look_dir = player.position - enemy.position;
            look_dir.y = 0;
