@@ -45,15 +45,13 @@ public class SC_FPSController : MonoBehaviour
     //курсор
     public Image cursore;
     public Text damage_text;
-    //босс
-    public Slider boss_hp;
-    public Text boss_name;
     public Text volna;
     public Text volna2;
 	public Text xz;
 
     void Start()
     {
+        isDead = false;
         characterController = GetComponent<CharacterController>();
         Cursor.visible = false;
         guipuse = true;
@@ -62,15 +60,12 @@ public class SC_FPSController : MonoBehaviour
         setting_text.enabled = true;
         cursore.enabled = true;
         damage_text.enabled = true;
-        boss_name.enabled = false;
-        boss_hp.gameObject.SetActive(false);
         volna.enabled = true;
         volna2.enabled = false;
     }
 
     void Update()
     {
-		//Debug.Log(healthSlider.value);
 		//пауза
         Time.timeScale = timer;
         if (Input.GetKeyDown(KeyCode.F1))

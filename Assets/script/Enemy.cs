@@ -16,17 +16,17 @@ public class Enemy : MonoBehaviour
     public float timer;//Таймер
     private string trigger_Die_1 = "Die_1";//Триггер смерти врага
     private string trigger_Attack_zone = "Attack_zone";//Триггер атаки врага
-    private int health = 100; //ХП врага
+    private int health = 200; //ХП врага
     private static int points = 0;//Очки
     private Vector3 vector3, vector2;//Вектора хз как работает
-    private static int Vawe = 10;//Волны
+    public static int Vawe = 25;//Волны
     private int counter;
-    private static int temp = 0,temp1=1,temp2=0;
+    public static int temp = 0,temp1=1,temp2=0;
    public Text Vawe_info,Points_info;
    public bool winn = false;
    public Text volna;
    public Text volna2;
-   public float dd = 5;
+   public float dd = 10;
    public Slider healthSlider;
    public float currentHealth = 100;
     
@@ -34,8 +34,8 @@ public class Enemy : MonoBehaviour
     private IEnumerator Attackdelay()//Функция задержки удара
     {
         yield return new WaitForSeconds(0.9f);
-        this.move_speed = 7;
-        this.rotation_speed = 7; 
+        this.move_speed = 10;
+        this.rotation_speed = 10; 
     }
     private IEnumerator Delay()//Функция задержки удара
     {
@@ -80,7 +80,7 @@ public class Enemy : MonoBehaviour
             {
                 volna.enabled = false;
                 volna2.enabled = true;
-                Vawe = 20;
+                Vawe = 50;
                 Start();
                 temp = 0;
                 temp2 = 1;

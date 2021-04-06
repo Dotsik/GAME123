@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class playeratack : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class playeratack : MonoBehaviour
 
     private void DoAtack() // действие при атаке
     {   
+        System.Random rand = new System.Random();
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
@@ -31,9 +33,9 @@ public class playeratack : MonoBehaviour
             if(hit.collider.tag == "Enemy")
             {
 				GetComponent<Animator>().SetTrigger("Attttttaack");
-                damage_text.text = 25.ToString();
+                damage_text.text = rand.Next(20,30).ToString();
                 Enemy eHealth = hit.collider.GetComponent<Enemy>();
-                eHealth.TakeDamage(25);
+                eHealth.TakeDamage(Convert.ToInt32(damage_text.text));
                 
             }
         }
